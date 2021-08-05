@@ -1,15 +1,18 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return data.species.filter((elem) => ids.includes(elem.id));
+  return data.species.filter((elem) => ids.includes(elem.id)); // filter cria um novo array com os elementos que retornem true no teste. No caso, o teste vê se o id do elemento está dentro dos ids passados por
 }
 
 function getAnimalsOlderThan(animal, age) {
-  // seu código aqui
+
 }
 
 function getEmployeeByName(employeeName) {
-  // seu código aqui
+  if (employeeName === undefined) {
+    return {};
+  }
+  return data.employees.find((el) => el.firstName === employeeName || el.lastName === employeeName);
 }
 
 function createEmployee(personalInfo, associatedWith) {
