@@ -1,19 +1,19 @@
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
-  return data.species.filter((elem) => ids.includes(elem.id)); // filter cria um novo array com os elementos que retornem true no teste. No caso, o teste vê se o id do elemento está dentro dos ids passados por
+  return data.species.filter((elem) => ids.includes(elem.id)); // filter cria um novo array com os elementos que retornem true no teste. No caso, o teste vê se o id do elemento está dentro dos ids passados por parâmetro.
 }
 
 function getAnimalsOlderThan(animal, age) {
   const specie = data.species.find((el) => el.name === animal); // salva um objeto com os dados da espécie de animal passada por parâmetro.
-  return specie.residents.every((el) => el.age > age); // retorna o resultado da comparação de idade dos animais da referida espécie
+  return specie.residents.every((el) => el.age > age); // retorna o resultado da comparação de idade dos animais da referida espécie.
 }
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
-    return {}; // se não for passado parametro, o retorno é um objeto vazio
+    return {}; // se não for passado parametro, o retorno é um objeto vazio.
   }
-  return data.employees.find((el) => el.firstName === employeeName || el.lastName === employeeName); // retorna o objeto que contenha o primeiro ou o segundo nome igual ao parametro passado
+  return data.employees.find((el) => el.firstName === employeeName || el.lastName === employeeName); // retorna o objeto que contenha o primeiro ou o segundo nome igual ao parametro passado.
 }
 
 function createEmployee(personalInfo, associatedWith) {
@@ -22,11 +22,18 @@ function createEmployee(personalInfo, associatedWith) {
 }
 
 function isManager(id) {
-  return data.employees.some((employee) => employee.managers.includes(id)); // acessa os funcionários e busca pelo id passado nos campos de gerentes.
+  return data.employees.some((employee) => employee.managers.includes(id)); // acessa as pessoas funcionárias e busca pelo id passado nos campos de pessoas gerentes.
 }
 
-function addEmployee(id, firstName, lastName, managers, responsibleFor) {
-  // seu código aqui
+function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []) {
+  const newEmployee = { // cria objeto com dados da nova pessoa funcionária.
+    id,
+    firstName,
+    lastName,
+    managers,
+    responsibleFor,
+  };
+  data.employees.push(newEmployee);
 }
 
 function countAnimals(species) {
