@@ -5,18 +5,9 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-  const specie = data.species.find((el) => el.name === animal);
-  return specie.residents.every((el) => el.age > age);
+  const specie = data.species.find((el) => el.name === animal); // salva um objeto com os dados da espécie de animal passada por parâmetro.
+  return specie.residents.every((el) => el.age > age); // retorna o resultado da comparação de idade dos animais da referida espécie
 }
-
-// const specie = data.species.find((el) => el.name === animal);
-//   const nameCheck = (a) => a.name === animal;
-//   const ageCheck = (x) => x.residents.every((resident) => resident.age > age);
-//   if (nameCheck(specie) === true && ageCheck(specie) === true) {
-//     return true;
-//   }
-//   return false;
-// }
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
@@ -26,7 +17,8 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  // seu código aqui
+  const newCollab = { ...personalInfo, ...associatedWith };
+  return newCollab;
 }
 
 function isManager(id) {
