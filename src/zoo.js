@@ -17,12 +17,12 @@ function getEmployeeByName(employeeName) {
 }
 
 function createEmployee(personalInfo, associatedWith) {
-  const newCollab = { ...personalInfo, ...associatedWith };
+  const newCollab = { ...personalInfo, ...associatedWith }; // cria objeto com os parâmetros.
   return newCollab;
 }
 
 function isManager(id) {
-  // seu código aqui
+  return data.employees.some((employee) => employee.managers.includes(id)); // acessa os funcionários e busca pelo id passado nos campos de gerentes.
 }
 
 function addEmployee(id, firstName, lastName, managers, responsibleFor) {
