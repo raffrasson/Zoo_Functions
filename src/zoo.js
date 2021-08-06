@@ -5,14 +5,24 @@ function getSpeciesByIds(...ids) {
 }
 
 function getAnimalsOlderThan(animal, age) {
-
+  const specie = data.species.find((el) => el.name === animal);
+  return specie.residents.every((el) => el.age > age);
 }
+
+// const specie = data.species.find((el) => el.name === animal);
+//   const nameCheck = (a) => a.name === animal;
+//   const ageCheck = (x) => x.residents.every((resident) => resident.age > age);
+//   if (nameCheck(specie) === true && ageCheck(specie) === true) {
+//     return true;
+//   }
+//   return false;
+// }
 
 function getEmployeeByName(employeeName) {
   if (employeeName === undefined) {
-    return {};
+    return {}; // se não for passado parametro, o retorno é um objeto vazio
   }
-  return data.employees.find((el) => el.firstName === employeeName || el.lastName === employeeName);
+  return data.employees.find((el) => el.firstName === employeeName || el.lastName === employeeName); // retorna o objeto que contenha o primeiro ou o segundo nome igual ao parametro passado
 }
 
 function createEmployee(personalInfo, associatedWith) {
