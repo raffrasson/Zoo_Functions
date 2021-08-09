@@ -1,4 +1,3 @@
-const { species } = require('./data');
 const data = require('./data');
 
 function getSpeciesByIds(...ids) {
@@ -69,11 +68,11 @@ function getSchedule(dayName) {
 }
 
 function getOldestFromFirstSpecies(id) {
-  const employee = data.employees.find((person) => person.id === id);
-  const specie = data.species.find((animal) => animal.id === employee.responsibleFor[0]);
-  const oldestAge = specie.residents.reduce((acc, res) => ((res.age > acc) ? res.age : acc), 0);
-  const oldestAnimal = specie.residents.find((animal) => animal.age === oldestAge);
-  const { name, sex, age } = oldestAnimal;
+  const employee = data.employees.find((person) => person.id === id); // variável que guarda o funcionário com base no id passado.
+  const specie = data.species.find((animal) => animal.id === employee.responsibleFor[0]); // encontra a espécie que corresponde à primeira espécie que o funcionário cuida.
+  const oldestAge = specie.residents.reduce((acc, res) => ((res.age > acc) ? res.age : acc), 0); // função que compara idades, retornando a mais alta.
+  const oldestAnimal = specie.residents.find((animal) => animal.age === oldestAge); // percorre os animais até encontrar o que tem a idade igual a mais alta.
+  const { name, sex, age } = oldestAnimal; // desestrutura o objeto, para retornar o array na proxima linha.
   return [name, sex, age];
 }
 
