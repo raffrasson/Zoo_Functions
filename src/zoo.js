@@ -37,11 +37,26 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species) {
-  // seu código aqui
+  return data.species.find((typeOfAnimal) => typeOfAnimal.name === species).residents.length;
 }
 
+// if (species === undefined) {
+//   let names = data.species.map((animal) => ` ${animal.name}: ${animal.residents.length}`);
+//   names = { ...`${names.toString()}` };
+//   return names;
+// }
+// return data.species.find((typeOfAnimal) => typeOfAnimal.name === species).residents.length;
+// }
+
 function calculateEntry(entrants) {
-  // seu código aqui
+  // depois de muita dificuldade consegui achar o meu erro referenciando a solução do Leonardo Bermejo, da turma 14A.
+  // minha falha foi não perceber a possibilidade de usar a notação objeto[chave] para acessar o valor da chave.
+  if (entrants === undefined || Object.keys(entrants).length === 0) { // retorna 0 caso não haja parametro ou o objeto seja vazio (tamanho 0)
+    return 0;
+  }
+  return Object.keys(entrants).reduce( // Object.keys faz um array, partindo do objeto passado, com o tipo de pessoa (adullto, idoso ou criança).
+    (sum, person) => sum + (entrants[person] * data.prices[person]), 0, // Usando o tipo, podemos acessar o objeto-parametro e o objeto que guarda o preço, multiplicando-os e armazenando a soma num reduce.
+  );
 }
 
 function getAnimalMap(options) {
