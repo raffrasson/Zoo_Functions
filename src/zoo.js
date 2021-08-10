@@ -70,7 +70,17 @@ function getAnimalMap(options) {
 }
 
 function getSchedule(dayName) {
-  // seu código aqui
+  if (dayName === undefined) {
+    return {
+      Tuesday: 'Open from 8am until 6pm',
+      Wednesday: 'Open from 8am until 6pm',
+      Thursday: 'Open from 10am until 8pm',
+      Friday: 'Open from 10am until 8pm',
+      Saturday: 'Open from 8am until 10pm',
+      Sunday: 'Open from 8am until 8pm',
+      Monday: 'CLOSED',
+    };
+  }
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -84,7 +94,7 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   Object.keys(data.prices).forEach((price) => {
-    data.prices[price] = Math.fround((data.prices[price] * (percentage / 100)) * 100) / 100; // iguala cada preço à ele mesmo * a porcentagem.
+    data.prices[price] = Math.round(data.prices[price] * (percentage / 100 + 1) * 100) / 100; // iguala cada preço à ele mesmo * a porcentagem.
   });
 }
 
