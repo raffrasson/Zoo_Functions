@@ -37,7 +37,13 @@ function addEmployee(id, firstName, lastName, managers = [], responsibleFor = []
 }
 
 function countAnimals(species) {
-  return data.species.find((typeOfAnimal) => typeOfAnimal.name === species).residents.length;
+  if (species === undefined) { // se não receber espécie retorna animais e quantidades.
+    return data.species.reduce((acc, specie) => { // esse reduce adiciona um par chave valor para cada espécie dentro de um objeto (passado como valor inicial).
+      acc[specie.name] = specie.residents.length; // como o valor inicial do acumulador é um objeto, podemos incluir chave e valor com essa sintaxe.
+      return acc; // no fim retorna-se o objeto completo.
+    }, {});
+  }
+  return data.species.find((typeOfAnimal) => typeOfAnimal.name === species).residents.length; // caso passada uma espécie, busca o elemento com nome igual e retorna o tamanho do elemento que guarda os animais.
 }
 
 // if (species === undefined) {
@@ -78,7 +84,7 @@ function getOldestFromFirstSpecies(id) {
 
 function increasePrices(percentage) {
   Object.keys(data.prices).forEach((entry) => {
-    data.prices[entry] = Math.round(data.prices[entry] * (percentage / 100 + 1) * 100) / 100;
+    data.prices[entry] = Math.round(data.prices[entry] * (percentage / 100) * 100) / 100; // iguala cada preço à ele mesmo * a porcentagem.
   });
 }
 
