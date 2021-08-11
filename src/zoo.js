@@ -46,16 +46,8 @@ function countAnimals(species) {
   return data.species.find((typeOfAnimal) => typeOfAnimal.name === species).residents.length; // caso passada uma espécie, busca o elemento com nome igual e retorna o tamanho do elemento que guarda os animais.
 }
 
-// if (species === undefined) {
-//   let names = data.species.map((animal) => ` ${animal.name}: ${animal.residents.length}`);
-//   names = { ...`${names.toString()}` };
-//   return names;
-// }
-// return data.species.find((typeOfAnimal) => typeOfAnimal.name === species).residents.length;
-// }
-
 function calculateEntry(entrants) {
-  // depois de muita dificuldade consegui achar o meu erro referenciando a solução do Leonardo Bermejo, da turma 14A.
+  // depois de muita dificuldade consegui achar o meu erro referenciando a solução do Leonardo Bermejo, da turma 14A: https://github.com/tryber/sd-014-a-project-zoo-functions/pull/102/files.
   // minha falha foi não perceber a possibilidade de usar a notação objeto[chave] para acessar o valor da chave.
   if (entrants === undefined || Object.keys(entrants).length === 0) { // retorna 0 caso não haja parametro ou o objeto seja vazio (tamanho 0)
     return 0;
@@ -69,18 +61,28 @@ function getAnimalMap(options) {
   // seu código aqui
 }
 
+const schedule = { // variável declarada para a função getSchedule
+  Tuesday: 'Open from 8am until 6pm',
+  Wednesday: 'Open from 8am until 6pm',
+  Thursday: 'Open from 10am until 8pm',
+  Friday: 'Open from 10am until 8pm',
+  Saturday: 'Open from 8am until 10pm',
+  Sunday: 'Open from 8am until 8pm',
+  Monday: 'CLOSED',
+};
+
 function getSchedule(dayName) {
-  if (dayName === undefined) {
-    return {
-      Tuesday: 'Open from 8am until 6pm',
-      Wednesday: 'Open from 8am until 6pm',
-      Thursday: 'Open from 10am until 8pm',
-      Friday: 'Open from 10am until 8pm',
-      Saturday: 'Open from 8am until 10pm',
-      Sunday: 'Open from 8am until 8pm',
-      Monday: 'CLOSED',
-    };
+  if (dayName === undefined) { // se não for passado dia, retorna a lista de horarios.
+    return schedule;
   }
+  const daysArray = Object.entries(schedule); // transforma os itens da lista de horarios em array
+  let dayHours; // variável para guardar as horas do dia pesquisado
+  Object.keys(schedule).forEach((day, i) => { // itera no array da lista de horários, armazenando em dayHours o horário pesquisado
+    if (day === dayName) {
+      dayHours = Object.fromEntries([daysArray[i]]);
+    }
+  });
+  return dayHours;
 }
 
 function getOldestFromFirstSpecies(id) {
@@ -93,6 +95,7 @@ function getOldestFromFirstSpecies(id) {
 }
 
 function increasePrices(percentage) {
+  // referência para arredondamento: https://stackoverflow.com/questions/11832914/how-to-round-to-at-most-2-decimal-places-if-necessary
   Object.keys(data.prices).forEach((price) => {
     data.prices[price] = Math.round(data.prices[price] * (percentage / 100 + 1) * 100) / 100; // iguala cada preço à ele mesmo * a porcentagem.
   });
